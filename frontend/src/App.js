@@ -1,65 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
-import axios from 'axios';
-import React from "react";
+import React, { Component, Fragment } from 'react';
+import ReactDOM from 'react-dom';
 
 
+import Header from './component/layout/Header';
+import {Login} from "./component/auth/login";
+import {Logout} from "./component/auth/logout";
+import {Registration} from "./component/auth/register";
+import {Home} from "./component/home"
+import {ProductPage} from "./component/product/page/ProductPage"
 
-class App extends React.Component{
-  state = { details: [], }
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-  componentDidMount() {
-    let data;
-    axios.get('http://127.0.0.1:8000/api/catalog/')
-        .then(res => {
-          data = res.data;
-          this.setState({
-            details: data
-          });
-        })
-        .catch(err => {
-          console.log(err);
-        })
-  }
-  render() {
-      return(
-          <div>
-              <header>Данные из Django</header>
-              <hr></hr>
-              <hr></hr>
-              {this.state.details.map((output, id) => (
-                  <div key={id}>
-                      <div>
-                          <h2>{output.title}</h2>
-                          <p>{output.price}</p>
-                          <p>{output.image}</p>
-                      </div>
-                  </div>
-                  ))}
-          </div>
-      )
-  }
+import {Catalog} from "./component/product/catalog/catalog";
+import ProductCatalog from "./component/product/catalog/ProductCatalog";
+
+
+class App extends Component {
+    render() {
+        return (
+            <BrowserRouter>
+                <Header></Header>
+
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/register" element={<Registration/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/logout" element={<Logout/>}/>
+                    <Route path="/catalog" element={<ProductCatalog/>}/>
+                    <Route path="/catalog/:id" element={<ProductPage/>}/>
+                </Routes>
+            </BrowserRouter>
+            )
+
+    }
 }
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-export default App;
+// ReactDOM.render(<App />, document.getElementById('app'));
+export default App
