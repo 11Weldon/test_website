@@ -33,6 +33,8 @@ class CartAPI(APIView):
     """
     Single API to handle cart operations
     """
+    permission_classes = (IsAuthenticated,)
+
     def get(self, request, format=None):
         cart = Cart(request)
 

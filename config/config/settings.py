@@ -25,9 +25,14 @@ SECRET_KEY = 'django-insecure-^8_)_**6ddwn@g!suvbvgpq3ph^ide89_3x5v7n-azbs&h$d_l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'yourdomain.com', 'localhost:3000']
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    # Add any other origins as needed
+]
 
+CART_SESSION_ID = 'catalog'
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,6 +46,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'catalog',
+    'authentication',
+    'dj_database_url',
 
 
 ]
@@ -53,7 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 REST_FRAMEWORK = {
@@ -70,6 +78,8 @@ SIMPLE_JWT = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'config.urls'
 
@@ -91,20 +101,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
+import dj_database_url
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'User',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default='postgres://supername:aue5IGIMvpykfiYKkUYEr9MgpsFiyZhJ@dpg-clngdapll56s73fhehcg-a.oregon-postgres.render.com/marhi_website')
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'User',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -124,6 +137,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# settings.py
+
+
+
+
+
 
 
 # Internationalization
@@ -146,10 +166,10 @@ STATIC_DIRS = [
     BASE_DIR / "static"
 ]
 
+import os
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-MEDIA_DIRS = [
-    BASE_DIR / "media"
-]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
