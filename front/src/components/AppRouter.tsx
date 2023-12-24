@@ -7,12 +7,12 @@ import UserStore from "../stores/UserStore";
 
 
 const AppRouter = () => {
-    const user = useContext<{ user: UserStore } | null>(Context);
+    const user = useContext(Context);
 
     console.log(user);
     return (
         <Routes>
-            {user?.isAuth && authRoutes.map(({ path, Component }) =>
+            {user?.user.isAuth && authRoutes.map(({ path, Component }) =>
                 <Route key={path} path={path} Component={Component} />
             )}
             {publicRoutes.map(({ path, Component }) =>
