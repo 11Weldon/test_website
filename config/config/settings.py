@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^8_)_**6ddwn@g!suvbvgpq3ph^ide89_3x5v7n-azbs&h$d_l'
+SECRET_KEY = 'Secret'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -106,7 +106,7 @@ import dj_database_url
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://supername:aue5IGIMvpykfiYKkUYEr9MgpsFiyZhJ@dpg-clngdapll56s73fhehcg-a.oregon-postgres.render.com/marhi_website')
+    'default': dj_database_url.config(default='vv')
 }
 # DATABASES = {
 #     'default': {
